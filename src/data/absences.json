@@ -16,7 +16,7 @@
     },
     "historical_note": "Historical seed restricted to OUT-FROM-START cases that are publicly documented. Partial absences (injuries mid-tournament) are noted but excluded from calibration to keep the signal clean.",
     "compiled_at": "2026-05-17",
-    "current_updated_at": "2026-05-27T17:14:51.123Z",
+    "current_updated_at": "2026-05-28T12:36:38.699Z",
     "current_source": "transfermarkt squad pages (injury flag)"
   },
   "historical": {
@@ -172,7 +172,7 @@
         "player": "Amir Hadziahmetovic",
         "position": "DM",
         "minutes_qual": 0,
-        "market_value_mil": 4.2,
+        "market_value_mil": 4,
         "reason": "Injured (flagged by transfermarkt)"
       },
       {
@@ -282,7 +282,7 @@
         "player": "Josip Sutalo",
         "position": "CB",
         "minutes_qual": 0,
-        "market_value_mil": 15,
+        "market_value_mil": 12,
         "reason": "Injured (flagged by transfermarkt)"
       }
     ],
@@ -421,7 +421,7 @@
         "player": "In-beom Hwang",
         "position": "DM",
         "minutes_qual": 0,
-        "market_value_mil": 8,
+        "market_value_mil": 7,
         "reason": "Injured (flagged by transfermarkt)"
       }
     ],
@@ -443,7 +443,7 @@
         "player": "Tyler Bindon",
         "position": "CB",
         "minutes_qual": 0,
-        "market_value_mil": 1.5,
+        "market_value_mil": 3.5,
         "reason": "Injured (flagged by transfermarkt)"
       }
     ],
@@ -506,8 +506,24 @@
         "reason": "Injured (flagged by transfermarkt)"
       }
     ],
-    "SUI": [],
-    "SWE": [],
+    "SUI": [
+      {
+        "player": "Noah Okafor",
+        "position": "WG",
+        "minutes_qual": 0,
+        "market_value_mil": 18,
+        "reason": "Injured (flagged by transfermarkt)"
+      }
+    ],
+    "SWE": [
+      {
+        "player": "Gabriel Gudmundsson",
+        "position": "FB",
+        "minutes_qual": 0,
+        "market_value_mil": 20,
+        "reason": "Injured (flagged by transfermarkt)"
+      }
+    ],
     "TUN": [],
     "TUR": [
       {
