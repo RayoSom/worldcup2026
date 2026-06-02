@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+import { modules } from '@/config/modules';
 
 export function Header() {
   const t = useTranslations('header');
@@ -24,6 +24,8 @@ export function Header() {
     router.replace(pathname, { locale: to });
   };
 
+  const isActive = (segment: string) => pathname.includes(`/${segment}`);
+
   return (
     <header
       className={cn(
@@ -33,31 +35,55 @@ export function Header() {
     >
       <div
         className={cn(
-          'mx-auto flex max-w-[1440px] items-center justify-between gap-6 rounded-full border px-5 transition-all duration-300',
+          'mx-auto flex max-w-[1440px] items-center gap-4 rounded-full border px-5 transition-all duration-300',
           scrolled
             ? 'glass mx-4 h-12 border-border'
             : 'mx-6 h-14 border-transparent',
         )}
       >
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <Image
-            src="/logo.jpg"
-            alt="Outliners"
-            width={28}
-            height={28}
-            priority
-            className="rounded-md ring-1 ring-gold/30 transition-transform group-hover:scale-110"
-          />
-          <span className="text-sm font-medium tracking-wide text-fg-0">{t('brand')}</span>
+        {/* Logo — Colombia gradient text */}
+        <Link
+          href="/torneo"
+          className="font-bold text-sm tracking-wide shrink-0"
+          style={{
+            background: 'var(--gradient-colombia-logo)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          WC2026 ⚽
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7 text-sm text-fg-2">
-          <Link href="/#simulate" className="hover:text-fg-0 transition-colors">{t('nav_simulate')}</Link>
-          <Link href="/backtest" className="hover:text-fg-0 transition-colors">Backtest</Link>
-          <Link href="/methodology" className="hover:text-fg-0 transition-colors">{t('nav_methodology')}</Link>
+        {/* Module tabs — conditional on enabled flags */}
+        <nav className="hidden md:flex items-center gap-1">
+          {modules.torneo.enabled && (
+            <NavLink
+              href="/torneo"
+              active={isActive('torneo')}
+              variant="colombia"
+              label={t('nav_torneo')}
+            />
+          )}
+          {modules.partido.enabled && (
+            <NavLink
+              href="/partido"
+              active={isActive('partido')}
+              variant="colombia"
+              label={t('nav_partido')}
+            />
+          )}
+          {modules.predictor.enabled && (
+            <NavLink
+              href="/predictor"
+              active={isActive('predictor')}
+              variant="ia"
+              label={t('nav_predictor')}
+            />
+          )}
         </nav>
 
-        <div className="flex items-center gap-1 rounded-full border border-border bg-bg-1/40 p-0.5">
+        {/* Language switcher — preserved from original */}
+        <div className="ml-auto flex items-center gap-1 rounded-full border border-border bg-bg-1/40 p-0.5 shrink-0">
           <button
             onClick={() => switchLocale('es')}
             className={cn(
@@ -81,5 +107,43 @@ export function Header() {
         </div>
       </div>
     </header>
+  );
+}
+
+function NavLink({
+  href,
+  active,
+  variant,
+  label,
+}: {
+  href: string;
+  active: boolean;
+  variant: 'colombia' | 'ia';
+  label: string;
+}) {
+  const activeStyle =
+    variant === 'ia'
+      ? {
+          background: 'var(--gradient-ia)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }
+      : {
+          background: 'var(--gradient-colombia-logo)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        };
+
+  return (
+    <Link
+      href={href}
+      className={cn(
+        'px-3 py-1.5 rounded text-xs font-semibold transition-colors',
+        active ? '' : 'text-fg-2 hover:text-fg-0',
+      )}
+      style={active ? activeStyle : {}}
+    >
+      {label}
+    </Link>
   );
 }

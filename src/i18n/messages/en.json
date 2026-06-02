@@ -8,6 +8,9 @@
     "nav_simulate": "Simulate",
     "nav_methodology": "Methodology",
     "nav_about": "About",
+    "nav_torneo": "Tournament",
+    "nav_partido": "Match",
+    "nav_predictor": "AI Predictor",
     "lang_es": "ES",
     "lang_en": "EN"
   },
