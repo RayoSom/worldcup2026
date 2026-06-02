@@ -24,7 +24,8 @@ export function Header() {
     router.replace(pathname, { locale: to });
   };
 
-  const isActive = (segment: string) => pathname.includes(`/${segment}`);
+  const isActive = (segment: string) =>
+    pathname === `/${segment}` || pathname.startsWith(`/${segment}/`);
 
   return (
     <header
@@ -43,11 +44,12 @@ export function Header() {
       >
         {/* Logo — Colombia gradient text */}
         <Link
-          href="/torneo"
+          href={modules.torneo.enabled ? '/torneo' : modules.partido.enabled ? '/partido' : '/'}
           className="font-bold text-sm tracking-wide shrink-0"
           style={{
             background: 'var(--gradient-colombia-logo)',
             WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}
         >
@@ -126,11 +128,13 @@ function NavLink({
       ? {
           background: 'var(--gradient-ia)',
           WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }
       : {
           background: 'var(--gradient-colombia-logo)',
           WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         };
 
