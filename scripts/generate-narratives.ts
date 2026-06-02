@@ -55,7 +55,7 @@ Return ONLY valid JSON with this exact structure, no markdown, no extra text:
   "analysis": "<2-sentence World Cup 2026 outlook in English>",
   "analysisEs": "<perspectiva del Mundial 2026 en 2 frases en español>"
 }`,
-    maxTokens: 500,
+    maxOutputTokens: 500,
   })
 
   // Strip any markdown code blocks if present
