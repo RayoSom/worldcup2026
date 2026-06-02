@@ -55,6 +55,30 @@
 
 :root {
   color-scheme: dark;
+
+  /* WC2026 Colombia Premium Theme */
+  --bg-base: #080810;
+  --bg-surface: #0d0d1f;
+  --bg-surface-2: #1a1a2e;
+
+  /* Colombia flag */
+  --col-yellow: #FCD116;
+  --col-blue: #003893;
+  --col-red: #CE1126;
+
+  /* IA module */
+  --ia-purple: #a855f7;
+  --ia-purple-dark: #6d28d9;
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-muted: #6b7280;
+  --text-subtle: #374151;
+
+  /* Gradients */
+  --gradient-colombia: linear-gradient(90deg, #FCD116, #003893, #CE1126);
+  --gradient-colombia-logo: linear-gradient(90deg, #FCD116 0%, #f59e0b 50%, #CE1126 100%);
+  --gradient-ia: linear-gradient(90deg, #a855f7, #e879f9);
 }
 
 html {
