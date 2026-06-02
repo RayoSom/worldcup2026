@@ -13,6 +13,7 @@
     "fetch-results": "tsx scripts/fetch-results.ts",
     "fetch-cards": "tsx scripts/fetch-cards.ts",
     "snapshot-run": "tsx scripts/snapshot-run.ts",
+    "generate:narratives": "dotenv -e .env.local -- tsx scripts/generate-narratives.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -41,6 +42,7 @@
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.5.5",
     "vaul": "^1.1.2",
+    "zod": "^4.4.3",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
@@ -52,6 +54,7 @@
     "@types/react-dom": "^19.0.2",
     "autoprefixer": "^10.4.20",
     "cheerio": "^1.0.0",
+    "dotenv-cli": "^11.0.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^4.0.0-beta.6",
     "tsx": "^4.19.2",
