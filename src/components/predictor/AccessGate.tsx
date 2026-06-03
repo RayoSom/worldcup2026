@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, KeyboardEvent } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface AccessGateProps {
   onUnlock: (code: string) => Promise<boolean>
@@ -9,6 +10,7 @@ interface AccessGateProps {
 }
 
 export function AccessGate({ onUnlock, validating, error }: AccessGateProps) {
+  const t = useTranslations('predictor')
   const [input, setInput] = useState('')
 
   function handleSubmit() {
@@ -22,6 +24,12 @@ export function AccessGate({ onUnlock, validating, error }: AccessGateProps) {
       handleSubmit()
     }
   }
+
+  const features = [
+    { icon: '🧠', label: t('feature1') },
+    { icon: '📊', label: t('feature2') },
+    { icon: '💬', label: t('feature3') },
+  ]
 
   return (
     <div
@@ -43,20 +51,16 @@ export function AccessGate({ onUnlock, validating, error }: AccessGateProps) {
               backgroundClip: 'text',
             }}
           >
-            Predictor IA
+            {t('title')}
           </h1>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            Análisis táctico profundo del Mundial 2026 con IA generativa.
+            {t('subtitle')}
           </p>
         </div>
 
         {/* Feature preview cards */}
         <div className="grid grid-cols-3 gap-3 w-full">
-          {[
-            { icon: '🧠', label: 'Análisis táctico' },
-            { icon: '📊', label: 'Estadísticas' },
-            { icon: '💬', label: 'Chat libre' },
-          ].map(({ icon, label }) => (
+          {features.map(({ icon, label }) => (
             <div
               key={label}
               className="flex flex-col items-center gap-2 rounded-xl p-4 text-center"
@@ -81,7 +85,7 @@ export function AccessGate({ onUnlock, validating, error }: AccessGateProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Código de acceso..."
+              placeholder={t('placeholder')}
               disabled={validating}
               className="flex-1 rounded-lg px-4 py-3 text-sm outline-none disabled:opacity-50"
               style={{
@@ -99,7 +103,7 @@ export function AccessGate({ onUnlock, validating, error }: AccessGateProps) {
                 color: '#fff',
               }}
             >
-              {validating ? '...' : 'Entrar'}
+              {validating ? '...' : t('enter')}
             </button>
           </div>
 

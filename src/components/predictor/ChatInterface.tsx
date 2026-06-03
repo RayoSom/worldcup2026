@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { useTranslations } from 'next-intl'
 import { useAccessCode } from '@/hooks/useAccessCode'
 
 interface ChatInterfaceProps {
@@ -14,6 +15,7 @@ interface Message {
 }
 
 export function ChatInterface({ code }: ChatInterfaceProps) {
+  const t = useTranslations('predictor')
   const { lock } = useAccessCode()
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const idRef = useRef(0)
@@ -22,8 +24,7 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
     {
       id: 'welcome',
       role: 'assistant',
-      content:
-        '¡Bienvenido al Predictor IA del Mundial 2026! Puedo analizar cualquier equipo, partido, grupo o escenario del torneo. ¿Sobre qué quieres hablar?',
+      content: t('welcome'),
     },
   ])
   const [input, setInput] = useState('')
@@ -67,7 +68,8 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
         })
 
         if (!res.ok) {
-          const errorText = res.status === 401 ? 'Código no válido.' : 'Error del servidor.'
+          // 'Error del servidor.' has no matching i18n key — left hardcoded
+          const errorText = res.status === 401 ? t('wrongCode') : 'Error del servidor.'
           setMessages(prev =>
             prev.map(m => (m.id === aiId ? { ...m, content: errorText } : m)),
           )
@@ -96,14 +98,14 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
       } catch {
         setMessages(prev =>
           prev.map(m =>
-            m.id === aiId ? { ...m, content: 'Error de conexión. Intenta de nuevo.' } : m,
+            m.id === aiId ? { ...m, content: t('connectionError') } : m,
           ),
         )
       } finally {
         setIsLoading(false)
       }
     },
-    [messages, isLoading, code],
+    [messages, isLoading, code, t],
   )
 
   function handleSubmit(e: React.FormEvent) {
@@ -129,9 +131,10 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
                 backgroundClip: 'text',
               }}
             >
-              Predictor IA
+              {t('title')}
             </h1>
             <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              {/* "Mundial 2026 · Análisis con Gemini" has no matching i18n key — left hardcoded */}
               Mundial 2026 · Análisis con Gemini
             </p>
           </div>
@@ -146,7 +149,7 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
               border: '1px solid color-mix(in srgb, var(--text-muted) 20%, transparent)',
             }}
           >
-            Cerrar sesión
+            {t('logout')}
           </button>
         </div>
 
@@ -198,7 +201,7 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
                   color: 'var(--text-muted)',
                 }}
               >
-                <span className="animate-pulse">Analizando...</span>
+                <span className="animate-pulse">{t('analyzing')}</span>
               </div>
             </div>
           )}
@@ -212,7 +215,7 @@ export function ChatInterface({ code }: ChatInterfaceProps) {
             type="text"
             value={input}
             onChange={e => setInput(e.target.value)}
-            placeholder="¿Quién ganará el grupo A? ¿Brasil es favorito?..."
+            placeholder={t('chatPlaceholder')}
             disabled={isLoading}
             className="flex-1 rounded-lg px-4 py-3 text-sm outline-none disabled:opacity-50"
             style={{

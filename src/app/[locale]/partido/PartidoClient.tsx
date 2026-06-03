@@ -19,6 +19,7 @@ interface PartidoClientProps {
 
 export function PartidoClient({ locale }: PartidoClientProps) {
   const t = useTranslations('partido');
+  const tPredictor = useTranslations('predictor');
   const [result, setResult] = useState<MatchSimResult | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
   const [teamA, setTeamA] = useState<Team | null>(null);
@@ -117,7 +118,7 @@ export function PartidoClient({ locale }: PartidoClientProps) {
         {/* Step 4 — AI Predictor Panel */}
         {result && !isSimulating && teamA && teamB && modules.predictor.panelEnabled && (
           <section className="flex flex-col gap-3">
-            <StepLabel label="Predictor IA" />
+            <StepLabel label={tPredictor('title')} />
             <PredictorPanel
               teamA={{ code: teamA.id, name: locale === 'es' ? teamA.name_es : teamA.name_en, elo: teamA.elo }}
               teamB={{ code: teamB.id, name: locale === 'es' ? teamB.name_es : teamB.name_en, elo: teamB.elo }}
