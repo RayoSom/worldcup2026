@@ -99,6 +99,22 @@
     "step2": "RESULT",
     "step3": "ANALYSIS"
   },
+  "predictor": {
+    "title": "AI Predictor",
+    "subtitle": "Deep tactical analysis of World Cup 2026 with generative AI.",
+    "locked": "Requires access code",
+    "placeholder": "Access code...",
+    "enter": "Enter",
+    "logout": "Log out",
+    "analyzing": "Analyzing...",
+    "chatPlaceholder": "Who will win Group A? Is Brazil the favorite?...",
+    "welcome": "Welcome to the WC2026 AI Predictor! I can analyze any team, match, group or tournament scenario. What do you want to talk about?",
+    "feature1": "Tactical analysis",
+    "feature2": "Statistics",
+    "feature3": "Free chat",
+    "wrongCode": "Wrong code. Try again.",
+    "connectionError": "Connection error."
+  },
   "methodology": {
     "title": "Methodology",
     "lead": "How the simulator works, no secrets. Same approach as the original video (ELO + Poisson + Monte Carlo), built from scratch in pure TypeScript.",

@@ -99,6 +99,22 @@
     "step2": "RESULTADO",
     "step3": "ANÁLISIS"
   },
+  "predictor": {
+    "title": "Predictor IA",
+    "subtitle": "Análisis táctico profundo del Mundial 2026 con IA generativa.",
+    "locked": "Requiere código de acceso",
+    "placeholder": "Código de acceso...",
+    "enter": "Entrar",
+    "logout": "Cerrar sesión",
+    "analyzing": "Analizando...",
+    "chatPlaceholder": "¿Quién ganará el grupo A? ¿Brasil es favorito?...",
+    "welcome": "¡Bienvenido al Predictor IA del Mundial 2026! Puedo analizar cualquier equipo, partido, grupo o escenario del torneo. ¿Sobre qué quieres hablar?",
+    "feature1": "Análisis táctico",
+    "feature2": "Estadísticas",
+    "feature3": "Chat libre",
+    "wrongCode": "Código incorrecto. Intenta de nuevo.",
+    "connectionError": "Error de conexión."
+  },
   "methodology": {
     "title": "Metodología",
     "lead": "Cómo funciona el simulador, sin secretos. Mismo enfoque que el video original (ELO + Poisson + Monte Carlo), implementado desde cero en TypeScript puro.",
