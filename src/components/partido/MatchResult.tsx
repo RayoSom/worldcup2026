@@ -17,7 +17,7 @@ export function MatchResult({ result, labels }: MatchResultProps) {
 
   const pA = (teamAWin * 100).toFixed(1);
   const pD = (draw * 100).toFixed(1);
-  const pB = (teamBWin * 100).toFixed(1);
+  const pB = (100 - parseFloat(pA) - parseFloat(pD)).toFixed(1);
 
   const topScore = topScores[0] ?? null;
 

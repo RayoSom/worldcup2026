@@ -125,6 +125,7 @@ function TeamPickerSlot({
         }}
       >
         <select
+          aria-label={placeholder}
           value={selectedId}
           onChange={(e) => onChange(e.target.value)}
           disabled={disabled}
