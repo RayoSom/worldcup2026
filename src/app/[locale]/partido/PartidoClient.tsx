@@ -7,7 +7,9 @@ import type { Team } from '@/lib/sim/types';
 import { TeamSelector } from '@/components/partido/TeamSelector';
 import { MatchResult } from '@/components/partido/MatchResult';
 import { NarrativeCard } from '@/components/partido/NarrativeCard';
+import { PredictorPanel } from '@/components/partido/PredictorPanel';
 import { simulateMatch, type MatchSimResult } from '@/lib/simulateMatch';
+import { modules } from '@/config/modules';
 
 const teams: Team[] = (teamsData as { teams: Team[] }).teams;
 
@@ -112,8 +114,17 @@ export function PartidoClient({ locale }: PartidoClientProps) {
           </section>
         )}
 
-        {/* Placeholder for Task 8: PredictorPanel */}
-        {/* <PredictorPanel teamA={teamA} teamB={teamB} result={result} locale={locale} /> */}
+        {/* Step 4 — AI Predictor Panel */}
+        {result && !isSimulating && teamA && teamB && modules.predictor.panelEnabled && (
+          <section className="flex flex-col gap-3">
+            <StepLabel label="Predictor IA" />
+            <PredictorPanel
+              teamA={{ code: teamA.id, name: locale === 'es' ? teamA.name_es : teamA.name_en, elo: teamA.elo }}
+              teamB={{ code: teamB.id, name: locale === 'es' ? teamB.name_es : teamB.name_en, elo: teamB.elo }}
+              matchResult={{ teamAWin: result.teamAWin, draw: result.draw, teamBWin: result.teamBWin }}
+            />
+          </section>
+        )}
       </div>
     </div>
   );
