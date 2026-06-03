@@ -24,9 +24,14 @@ export function useMatches(): MatchesState {
     async function load() {
       try {
         const res = await fetch('/api/matches')
+        if (!res.ok) {
+          setState(s => ({ ...s, loading: false, error: `Error ${res.status}` }))
+          return
+        }
         const data = await res.json()
-        const liveCount = (data.matches as ParsedMatch[]).filter(m => m.matchStatus === 'live').length
-        setState({ matches: data.matches, loading: false, error: null, liveCount, configured: data.configured ?? false })
+        const matches: ParsedMatch[] = data.matches ?? []
+        const liveCount = matches.filter(m => m.matchStatus === 'live').length
+        setState({ matches, loading: false, error: null, liveCount, configured: data.configured ?? false })
       } catch {
         setState(s => ({ ...s, loading: false, error: 'Error cargando partidos' }))
       }

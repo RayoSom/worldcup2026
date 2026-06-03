@@ -1,10 +1,11 @@
-import { streamText } from 'ai'
+import { streamText, type ModelMessage } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import { NextRequest } from 'next/server'
 import { isValidCode } from '../validate-code/logic'
 import { buildSystemPrompt } from '@/lib/systemPrompt'
 
-export const runtime = 'edge'
+// Node.js runtime — edge has webpack bundling issues with the ai SDK
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: NextRequest) {
   const accessCode = req.headers.get('x-access-code') ?? ''
@@ -19,7 +20,18 @@ export async function POST(req: NextRequest) {
     return new Response('AI not configured', { status: 503 })
   }
 
-  const { messages, context } = await req.json()
+  let messages: ModelMessage[], context: Parameters<typeof buildSystemPrompt>[0]
+  try {
+    const body = await req.json()
+    messages = body.messages
+    context = body.context
+  } catch {
+    return new Response('Bad Request: invalid JSON', { status: 400 })
+  }
+
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return new Response('Bad Request: messages must be a non-empty array', { status: 400 })
+  }
 
   const google = createGoogleGenerativeAI({ apiKey })
 
