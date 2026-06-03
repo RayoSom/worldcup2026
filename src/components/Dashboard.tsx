@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { useSimulation } from '@/hooks/useSimulation';
+import { useMatches } from '@/hooks/useMatches';
 import { Hero } from './Hero';
 import { ChampionProbBar } from './ChampionProbBar';
 import { StageMatrix } from './StageMatrix';
@@ -20,6 +21,7 @@ import { SectionNav } from './layout/SectionNav';
 
 export function Dashboard() {
   const { state, run } = useSimulation();
+  const { liveCount } = useMatches();
   const lastStatus = useRef(state.status);
 
   useEffect(() => {
@@ -34,6 +36,14 @@ export function Dashboard() {
 
   return (
     <div className="relative">
+      {liveCount > 0 && (
+        <div
+          className="w-full py-2 px-4 text-center text-xs font-bold mb-4 rounded"
+          style={{ background: 'rgba(206,17,38,0.15)', color: 'var(--col-red)', border: '1px solid rgba(206,17,38,0.3)' }}
+        >
+          🔴 {liveCount} PARTIDO{liveCount > 1 ? 'S' : ''} EN VIVO AHORA
+        </div>
+      )}
       <Hero state={state} onRun={run} />
 
       {state.result && (
