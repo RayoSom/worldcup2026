@@ -7,15 +7,15 @@ import { useAccessCode } from '@/hooks/useAccessCode'
 import { AccessGate } from '@/components/predictor/AccessGate'
 import { ChatInterface } from '@/components/predictor/ChatInterface'
 
-export function PredictorPageClient() {
+export function PredictorPageClient({ locale }: { locale: string }) {
   const router = useRouter()
   const { code, isUnlocked, validating, error, unlock } = useAccessCode()
 
   useEffect(() => {
     if (!modules.predictor.enabled) {
-      router.replace('/torneo')
+      router.replace(`/${locale}/torneo`)
     }
-  }, [router])
+  }, [router, locale])
 
   if (!modules.predictor.enabled) {
     return null

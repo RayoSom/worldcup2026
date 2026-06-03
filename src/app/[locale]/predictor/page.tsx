@@ -8,5 +8,5 @@ export default async function PredictorPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <PredictorPageClient />;
+  return <PredictorPageClient locale={locale} />;
 }
